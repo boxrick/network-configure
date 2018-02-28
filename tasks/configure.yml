@@ -1,0 +1,10 @@
+---
+# module: network-configure/tasks/configure
+# description: Configure everything for network
+
+- name: Template out the network unit files
+  template:
+    src: template.conf.j2
+    dest: "/vagrant/example_{{ item.key }}"
+  with_dict: "{{ network_configure_interfaces }}"
+  notify: network_restart

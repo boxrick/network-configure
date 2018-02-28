@@ -1,0 +1,16 @@
+---
+# module: network-configure/tasks/install
+# description: Install our required packages for hello
+
+- name: Remove netplan config
+  file:
+    state: absent
+    path: "/etc/netplan"
+
+- name: Remove ifupdown config
+  file:
+    state: absent
+    path: "{{ item }}"
+  with_items:
+    - /etc/network/interfaces.d
+    - /etc/network/interfaces

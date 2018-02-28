@@ -1,0 +1,20 @@
+#jinja2: lstrip_blocks: "True", trim_blocks: "True"
+
+{# Iterate through each of the items in friendly name #}
+{% for title, values in item.value.iteritems()| sort %}
+  {# If any matches for the string config then use this for the title #}
+  {% if title | search('config') %}
+[{{ title | regex_replace('config_', '') }}]
+    {# Then iterate over each of the values in this dict and create K/V from these, if something list then repeat the key #}
+    {% for key, value in values.iteritems() | sort %}
+      {% if value is iterable and value is not string %}
+        {% for list_item in value %}
+{{ key }}={{ list_item }}
+        {% endfor %}
+      {% elif value is string or value is number %}
+{{ key }}={{ value }}
+      {% endif %}
+    {% endfor %}
+
+  {% endif %}
+{% endfor %}

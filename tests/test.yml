@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: true
+  become_method: sudo
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  roles:
+    - role: "{{ playbook_dir | dirname | basename }}"

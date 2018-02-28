@@ -1,0 +1,9 @@
+---
+# name: network-configure/handlers
+# description: All our handlers for network-configure go in here
+
+- name: restart networkd
+  systemd:
+    state: restarted
+    name: systemd-networkd
+  listen: network_restart

@@ -1,0 +1,12 @@
+---
+# module: network-configure/tasks
+# description: Install hello onto Ubuntu 16 or 18
+
+- name: Include our operating system specific variables
+  include_vars: "{{ ansible_os_family | lower }}.yml"
+
+- name: Install networking
+  include_tasks: install.yml
+
+- name: Configure networking
+  include_tasks: configure.yml

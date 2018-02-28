@@ -1,0 +1,45 @@
+---
+# name: network-configure/defaults
+# description: ALL our default variables for network-configure go in here
+#------------------------------------------------------------------------------
+# Packages - All our required packages we need installing
+#------------------------------------------------------------------------------
+
+# - pre-requisites -
+
+network_configure_interfaces:
+  primary:
+    device_type: [ eth ]
+    network_order: 1
+    config_Match:
+      Name: enp0s3
+    config_Network:
+      DHCP: ipv4
+  secondary:
+    device_type: [ eth ]
+    network_order: 2
+    config_Match:
+      Name: enp0s8
+    config_Network:
+      Address: 10.0.3.25/24
+
+# * None OS Specific *
+# network_configure_interfaces:
+#   primary:
+#     device_type: [ eth ]
+#     network_order: 1
+#     config_Match:
+#       Name: enp0s16
+#     config_Network:
+#       Address: 10.1.10.9/24
+#       Gateway: 10.1.10.1
+#       DNS: 10.1.10.1
+#   secondary:
+#     device_type: [ eth ]
+#     network_order: 2
+#     config_Match:
+#       Name: enp0s17
+#     config_Network:
+#       Address: 10.1.10.10/24
+#       Gateway: 10.1.10.1
+#       DNS: [ 10.1.10.1, 10.1.10.2 ]
